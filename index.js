@@ -1,4 +1,4 @@
-let endpoint = "http://fetched.herokuapp.com";
+let endpoint = "https://fetched.herokuapp.com";
 let app = Vue.createApp({
 	data() {
 		return {
