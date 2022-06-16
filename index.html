@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <script src="vue@3.0.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <title>WordPress Theme Detector</title>
+</head>
+<body class="p-10">
+    <div id="search">
+        <form class="w-full rounded-md border border-gray-400 pb-3 overflow-hidden">
+            <div class="px-3 bg-gray-400">WordPress Theme Detector</div>
+            <div class="p-4">
+                <div class="">Enter a domain name</div>
+                <div>
+                    <input v-model="url" autofocus type="url" placeholder="Example, https://example.com"
+                        class="w-full border border-gray-300 rounded-sm px-3" name="" id="">
+                </div>
+            </div>
+            <div class="flex justify-end px-5 gap-2">
+                <button @click.prevent="FetchTheme" class="bg-blue-600 text-white rounded-md px-2 py-1">
+                    Detect WP Theme
+                </button>
+                <button type="clear" class="rounded-md border border-gray-300 px-2 rounded-md center py-1">Clear</button>
+            </div>
+        </form>
+        <div v-if="loading" class="loading">Loading&#8230;</div>
+        <div v-if="err" class="bg-[#dc3545] text-white px-3 py-2 rounded-md mt-5">
+            <p>{{errorMessage}}</p>
+        </div>
+        <div class="overflow-hidden">
+            <table class="min-w-full">
+                <thead class="border-b bg-white" v-if="data">
+                    <tr>
+                        <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-900">#</th>
+                        <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-gray-900">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="obj in data" class="border-b bg-gray-100">
+                        <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900">{{obj.key}}</td>
+                        <td class="px-6 py-4 text-sm font-light text-gray-900">{{obj.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
